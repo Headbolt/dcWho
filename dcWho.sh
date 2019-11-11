@@ -32,7 +32,7 @@ TargetLocalDC=$4
 CurrentLocalDC=$(dsconfigad -show | grep "Preferred Domain controller" | cut -c 36-)
 #
 # Set the name of the script for later logging
-ScriptName="ZZ 15 - Site Specific AD Settings - Preferred DC"
+ScriptName="append prefix here as needed - Site Specific AD Settings - Preferred DC"
 #
 ###############################################################################################################################################
 #
