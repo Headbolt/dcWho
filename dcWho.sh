@@ -32,7 +32,7 @@ TargetLocalDC=$4
 CurrentLocalDC=$(dsconfigad -show | grep "Preferred Domain controller" | cut -c 36-)
 #
 # Set the name of the script for later logging
-ScriptName="append prefix here as needed - Site Specific AD Settings - Preferred DC"
+ScriptName="ZZ 15 - Site Specific AD Settings - Preferred DC"
 #
 ###############################################################################################################################################
 #
@@ -97,7 +97,7 @@ ScriptEnd(){
 SectionEnd
 #
 # Outputs the Current Preferred Domain Controller
-Echo Current Local Domain Controller To Be Set = $CurrentLocalDC
+Echo Current Local Domain Controller = $CurrentLocalDC
 #
 # Outputs the Target Preferred Domain Controller
 Echo Target Local Domain Controller To Be Set = $TargetLocalDC
@@ -120,6 +120,13 @@ if test "$CurrentLocalDC" == "$TargetLocalDC"
 		dsconfigad -preferred $TargetLocalDC
 		#
 		SectionEnd
+		/bin/echo Re-Checking Local DC
+		ReCheckLocalDC=$(dsconfigad -show | grep "Preferred Domain controller" | cut -c 36-)
+		#
+		# Outputs the New Preferred Domain Controller
+		Echo Current Local Domain Controller Now = $ReCheckLocalDC
+		#        
+		SectionEnd        
 		ScriptEnd
 		exit 0
 fi
